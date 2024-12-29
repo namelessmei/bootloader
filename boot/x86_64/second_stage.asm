@@ -5,7 +5,7 @@ KERNEL_HIGH      equ 0xFFFFFFFF80000000
 KERNEL_SEG       equ 0x1000
 KERNEL_OFF       equ 0x0000
 KERNEL_LOW       equ (KERNEL_SEG << 4) + KERNEL_OFF
-VGA_MEM         equ 0xB8000
+VGA_MEM          equ 0xB8000
 
 start:
     xor ax, ax
@@ -125,7 +125,6 @@ enter_lm:
     mov cr0, eax
     ret
 
-; Group 64-bit code
 [BITS 64]
 lm_entry:
     mov ax, 0x10
@@ -157,13 +156,11 @@ print_lm:
     pop rax
     ret
 
-; Data section at the end
 msg_stage2:    db 'Stage 2 loaded', 13, 10, 0
 msg_disk_err:  db 'Disk error', 13, 10, 0
 msg_lm:        db 'In long mode', 0
 msg_pm:        db 'In protected mode', 0
 
-; GDT structures at the very end since they're accessed less frequently
 align 16
 gdt32:
     dq 0
